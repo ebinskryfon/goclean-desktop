@@ -3,6 +3,7 @@ import { Download as DownloadIcon } from 'lucide-react'
 import { Section } from '../../components/Section'
 import { Reveal } from '../../components/Reveal'
 import { OsIcon, type OS } from '../../components/OsIcon'
+import { track } from '../../lib/track'
 import { REPO, SETUP_FILES, SETUP_REPO, VERSION } from '../../lib/site'
 
 const platforms: { os: OS; name: string; note: string }[] = [
@@ -36,6 +37,7 @@ export function Download() {
               <p className="mt-5 text-xs uppercase tracking-widest text-muted">Graphical installer</p>
               <a
                 href={SETUP_FILES[p.os]}
+                onClick={() => track('download')}
                 className="mt-2 inline-flex w-fit items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-[#04101c] transition hover:opacity-90"
               >
                 <DownloadIcon size={15} aria-hidden="true" />

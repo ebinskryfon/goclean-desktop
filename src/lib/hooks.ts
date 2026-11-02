@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { track } from './track'
 
 export function useCopy(text: string) {
   const [copied, setCopied] = useState(false)
@@ -17,6 +18,7 @@ export function useCopy(text: string) {
       document.execCommand('copy')
       ta.remove()
     }
+    track('copy')
     setCopied(true)
     window.clearTimeout(timer.current)
     timer.current = window.setTimeout(() => setCopied(false), 1800)
