@@ -2,18 +2,13 @@ import { useEffect, useState } from 'react'
 import { Download as DownloadIcon } from 'lucide-react'
 import { Section } from '../../components/Section'
 import { Reveal } from '../../components/Reveal'
-import { CodeBlock } from '../../components/CodeBlock'
 import { OsIcon, type OS } from '../../components/OsIcon'
-import { INSTALL_PS, INSTALL_SH, REPO, SETUP_FILES, SETUP_REPO, VERSION } from '../../lib/site'
+import { REPO, SETUP_FILES, SETUP_REPO, VERSION } from '../../lib/site'
 
-const num = VERSION.replace(/^v/, '')
-const asset = (os: OS, arch: string) =>
-  `${REPO}/releases/download/${VERSION}/goclean_${num}_${os}_${arch}.${os === 'windows' ? 'zip' : 'tar.gz'}`
-
-const platforms: { os: OS; name: string; cmd: string; lang: 'bash' | 'text'; archs: { label: string; arch: string }[]; note: string }[] = [
-  { os: 'linux', name: 'Linux', cmd: INSTALL_SH, lang: 'bash', archs: [{ label: 'x86_64', arch: 'amd64' }, { label: 'ARM64', arch: 'arm64' }], note: 'Make it executable first: chmod +x goclean-setup-linux.AppImage' },
-  { os: 'windows', name: 'Windows', cmd: INSTALL_PS, lang: 'text', archs: [{ label: 'x86_64', arch: 'amd64' }, { label: 'ARM64', arch: 'arm64' }], note: 'Windows may show a SmartScreen warning because the app is not code-signed. Click More info, then Run anyway.' },
-  { os: 'darwin', name: 'macOS', cmd: INSTALL_SH, lang: 'bash', archs: [{ label: 'Apple Silicon', arch: 'arm64' }, { label: 'Intel', arch: 'amd64' }], note: 'macOS may block the app because it is not code-signed. Right-click it, choose Open, then confirm.' },
+const platforms: { os: OS; name: string; note: string }[] = [
+  { os: 'linux', name: 'Linux', note: 'Make it executable first: chmod +x goclean-setup-linux.AppImage' },
+  { os: 'windows', name: 'Windows', note: 'Windows may show a SmartScreen warning because the app is not code-signed. Click More info, then Run anyway.' },
+  { os: 'darwin', name: 'macOS', note: 'macOS may block the app because it is not code-signed. Right-click it, choose Open, then confirm.' },
 ]
 
 function detectOS(): OS | null {
@@ -29,7 +24,7 @@ export function Download() {
   useEffect(() => setMine(detectOS()), [])
 
   return (
-    <Section id="download" eyebrow="Download" title="Install goclean on any platform." intro={`Version ${VERSION}. One binary, no runtime required. Use the one-line installer or download the archive directly.`}>
+    <Section id="download" eyebrow="Download" title="Install goclean on any platform." intro={`Version ${VERSION}. Download goclean Setup and it installs Go and goclean for you.`}>
       <div className="grid gap-px overflow-hidden rounded-md border border-line bg-line lg:grid-cols-3">
         {platforms.map((p, i) => (
           <Reveal key={p.os} delay={i * 80} className="h-full bg-bg">
@@ -48,29 +43,12 @@ export function Download() {
                 <span className="sr-only"> for {p.name}</span>
               </a>
               <p className="mt-3 text-xs leading-relaxed text-muted">{p.note}</p>
-              <p className="mt-6 text-xs uppercase tracking-widest text-muted">Command line</p>
-              <div className="mt-2"><CodeBlock code={p.cmd} lang={p.lang} title={p.os === 'windows' ? 'powershell' : 'shell'} /></div>
-              <p className="mt-6 text-xs uppercase tracking-widest text-muted">Direct download</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {p.archs.map((a, j) => (
-                  <a
-                    key={a.arch}
-                    href={asset(p.os, a.arch)}
-                    className={`inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition ${j === 0 ? 'bg-accent text-[#04101c] hover:opacity-90' : 'border border-line text-fg hover:bg-surface'}`}
-                  >
-                    <DownloadIcon size={15} aria-hidden="true" />
-                    {a.label}
-                    <span className="sr-only"> for {p.name}</span>
-                  </a>
-                ))}
-              </div>
             </div>
           </Reveal>
         ))}
       </div>
       <p className="mt-6 text-sm text-muted">
-        Setup installs Go and goclean for you; see its <a href={SETUP_REPO} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline">source</a>. Prefer Go? <code className="font-mono text-fg">go install github.com/ebinskryfon/goclean@latest</code>. Verify downloads with{' '}
-        <a href={`${REPO}/releases/download/${VERSION}/checksums.txt`} className="text-accent underline-offset-4 hover:underline">checksums.txt</a>, or see{' '}
+        Setup is open source: <a href={SETUP_REPO} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline">view the source</a>. Looking for the CLI only? See{' '}
         <a href={`${REPO}/releases`} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline">all releases</a>.
       </p>
     </Section>
