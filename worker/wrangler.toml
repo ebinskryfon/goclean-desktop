@@ -9,4 +9,5 @@ id = "e9daf32bb2bc4be8a92145578b95aa02"
 
 [vars]
 # Comma-separated sites allowed to report/read, e.g. your GitHub Pages origin
-ALLOWED_ORIGINS = "https://ebinskryfon.github.io,http://localhost:5173,http://localhost:4173"
+ALLOWED_ORIGINS="https://goclean.cloud,https://www.goclean.cloud,http://www.goclean.cloud,https://ebinskryfon.github.io"
+  
