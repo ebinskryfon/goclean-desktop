@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { Link, NavLink } from './SiteLink'
 import { Menu, X } from 'lucide-react'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'

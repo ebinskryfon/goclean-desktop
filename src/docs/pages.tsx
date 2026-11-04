@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '../components/SiteLink'
 import { CodeBlock } from '../components/CodeBlock'
 import { H2, Note } from './Prose'
 import { INSTALL_CMD, INSTALL_PS, INSTALL_SH, PKG, REPO } from '../lib/site'

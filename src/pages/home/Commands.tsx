@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '../../components/SiteLink'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Section } from '../../components/Section'
 import { Reveal } from '../../components/Reveal'

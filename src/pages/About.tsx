@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '../components/SiteLink'
 import { ArrowRight, Code2, Compass, Layers, Scale, Sparkles } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { usePageTitle } from '../lib/hooks'

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate } from './components/SiteLink'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import Home from './pages/Home'

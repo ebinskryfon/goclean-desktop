@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from './SiteLink'
 import { Logo } from './Logo'
 import { PKG, REPO, VERSION } from '../lib/site'
 

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, Navigate, NavLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Link, Navigate, NavLink } from '../components/SiteLink'
 import { ArrowLeft, ArrowRight, List, Search, X } from 'lucide-react'
 import { docs } from '../docs/pages'
 import { usePageTitle } from '../lib/hooks'

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '../../components/SiteLink'
 import { ArrowRight, Download } from 'lucide-react'
 import { Terminal } from '../../components/Terminal'
 import { GithubIcon } from '../../components/GithubIcon'
