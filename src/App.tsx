@@ -6,6 +6,9 @@ import { Footer } from './components/Footer'
 import Home from './pages/Home'
 import Docs from './pages/Docs'
 import About from './pages/About'
+import Faq from './pages/Faq'
+import Contributing from './pages/Contributing'
+import Privacy from './pages/Privacy'
 import Changelog from './pages/Changelog'
 import NotFound from './pages/NotFound'
 
@@ -28,6 +31,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/contributing" element={<Contributing />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/changelog" element={<Changelog />} />
           <Route path="/docs" element={<Navigate to="/docs/introduction" replace />} />
           <Route path="/docs/:slug" element={<Docs />} />

@@ -8,16 +8,33 @@ export type DocPage = { slug: string; title: string; summary: string; keywords: 
 
 const TREE = `my-saas/
 ├── cmd/
-│   └── api/
+│   ├── api/
+│   └── migrate/
+├── config/
 ├── internal/
 │   ├── domain/
+│   │   ├── entity/
+│   │   ├── errors/
+│   │   └── repository/
 │   ├── usecase/
-│   ├── delivery/
-│   └── infrastructure/
+│   │   ├── interface/
+│   │   └── implementation/
+│   ├── delivery/http/
+│   │   ├── handlers/
+│   │   ├── middleware/
+│   │   ├── response/
+│   │   └── routes.go
+│   ├── infrastructure/
+│   │   ├── container/
+│   │   ├── database/
+│   │   ├── persistence/
+│   │   └── server/
+│   └── types/
 ├── migrations/
-├── config/
-├── pkg/
-├── Dockerfile
+├── pkg/logger/
+├── .air.toml
+├── .env
+├── .goclean.json
 ├── docker-compose.yml
 ├── Makefile
 └── go.mod`
@@ -37,7 +54,7 @@ export const docs: DocPage[] = [
           <li>Your choice of HTTP framework: Gin or Chi.</li>
           <li>PostgreSQL, MySQL or SQLite through GORM.</li>
           <li>Viper configuration, Zerolog logging and graceful shutdown.</li>
-          <li>Docker Compose, Air hot reload and a Makefile.</li>
+          <li>A Docker Compose file for the database (PostgreSQL and MySQL), Air hot reload and a Makefile.</li>
           <li>A module generator for entities, DTOs, repositories, usecases, handlers, migrations and routes.</li>
         </ul>
         <H2>Next steps</H2>
@@ -80,14 +97,116 @@ export const docs: DocPage[] = [
       <>
         <H2>1. Create a project</H2>
         <CodeBlock code={'goclean new my-saas\ncd my-saas'} />
-        <p>goclean sets up the directory structure, <code>go.mod</code>, configuration, Docker files and a Makefile for you.</p>
+        <p>Run it with no flags for the interactive wizard, or pass <code>--router</code> and <code>--database</code>. goclean sets up the directory structure, <code>go.mod</code>, a <code>.env</code> file, a Makefile and, for PostgreSQL and MySQL, a Docker Compose file for the database.</p>
         <H2>2. Generate a module</H2>
         <CodeBlock code="goclean make:module Product name:string price:float stock:int" />
         <p>This creates the entity, DTOs, repository, usecase, handler and migration for <code>Product</code>, and registers its routes.</p>
-        <H2>3. Run it</H2>
-        <p>Start the server in development with hot reload using Air from the project root:</p>
-        <CodeBlock code="air" />
+        <H2>3. Set up the database and migrate</H2>
+        <p>With PostgreSQL or MySQL, start the database container first. SQLite needs no setup, so skip that line.</p>
+        <CodeBlock code={'docker compose up -d\nmake migrate'} />
+        <H2>4. Run it</H2>
+        <p>Start the server with hot reload. It uses Air when installed and otherwise falls back to <code>go run</code>:</p>
+        <CodeBlock code="make dev" />
+        <p>The API listens on port 8080 by default. Check <code>http://localhost:8080/health</code>, then see the <Link to="/docs/tutorial">tutorial</Link> for a full walkthrough with <code>curl</code> examples.</p>
         <Note>Want to see what would be created first? Add <code>--dry-run</code> to any command to preview the generated files. See <Link to="/docs/available-commands">Available Commands</Link>.</Note>
+      </>
+    ),
+  },
+  {
+    slug: 'tutorial', title: 'Tutorial: Build a REST API',
+    summary: 'Build and call a working Go REST API with goclean, step by step.',
+    keywords: 'tutorial walkthrough rest api crud example curl chi sqlite product handler usecase repository endpoints build go',
+    body: (
+      <>
+        <p>In this tutorial you will generate a Go API, add a <code>Product</code> feature, run it and call every endpoint with <code>curl</code>. It uses SQLite, so you do not need Docker or a database server.</p>
+        <Note>You need goclean installed (see <Link to="/docs/installation">Installation</Link>) and Go 1.23 or newer. If your Go is older, Go downloads the right toolchain automatically. Run <code>goclean doctor</code> to check.</Note>
+
+        <H2>1. Create the project</H2>
+        <CodeBlock code="goclean new shop --router chi --database sqlite --module github.com/me/shop" />
+        <p>This scaffolds the project, writes a <code>.env</code> file and runs <code>go mod tidy</code>. Move into it:</p>
+        <CodeBlock code="cd shop" />
+        <p>The project already contains a working <code>User</code> feature, a <code>/health</code> endpoint, middleware for CORS, request IDs, logging and panic recovery, and a <code>cmd/migrate</code> command.</p>
+
+        <H2>2. Generate a module</H2>
+        <CodeBlock code="goclean make:module Product name:string price:float stock:int" />
+        <p>goclean creates nine files and registers the module for you:</p>
+        <CodeBlock lang="text" title="output" code={`✓ Created: internal/domain/entity/product.go
+✓ Created: internal/types/product.go
+✓ Created: internal/domain/repository/product_repository.go
+✓ Created: internal/infrastructure/persistence/product_repository.go
+✓ Created: internal/usecase/interface/product_usecase.go
+✓ Created: internal/usecase/implementation/product_usecase.go
+✓ Created: internal/delivery/http/handlers/product_handler.go
+✓ Created: migrations/000002_create_products_table.up.sql
+✓ Created: migrations/000002_create_products_table.down.sql
+✓ Registered Product in container.go
+✓ Registered Product in routes.go`} />
+        <p>Add <code>--dry-run</code> first if you want to preview the list without writing anything.</p>
+
+        <H2>3. Run the migration</H2>
+        <CodeBlock code="make migrate" />
+        <p>This applies every pending file in <code>migrations</code>, including the new <code>products</code> table.</p>
+
+        <H2>4. Start the server</H2>
+        <CodeBlock code="make dev" />
+        <p><code>make dev</code> runs the server with Air hot reload. Use <code>make run</code> to run it once without watching files. In another terminal, check that it is healthy:</p>
+        <CodeBlock code="curl localhost:8080/health" />
+        <CodeBlock lang="text" title="response" code={'{"success":true,"data":{"database":"connected","status":"healthy"}}'} />
+
+        <H2>5. Call the endpoints</H2>
+        <p>The module registered five routes under <code>/api/v1/products</code>.</p>
+        <p><strong>Create</strong> a product:</p>
+        <CodeBlock code={`curl -X POST localhost:8080/api/v1/products \\
+  -H 'Content-Type: application/json' \\
+  -d '{"name":"Keyboard","price":49.9,"stock":12}'`} />
+        <CodeBlock lang="text" title="response" code={'{"success":true,"data":{"id":"95e47695-0407-42cc-9365-00af8e5f445d","name":"Keyboard","price":49.9,"stock":12,"created_at":"2026-11-04T18:18:59.878819614Z","updated_at":"2026-11-04T18:18:59.878819614Z"}}'} />
+        <p><strong>List</strong> products. Results are paginated:</p>
+        <CodeBlock code="curl localhost:8080/api/v1/products" />
+        <CodeBlock lang="text" title="response (shortened)" code={'{"success":true,"data":[{"id":"95e47695-…","name":"Keyboard","price":49.9,"stock":12,…}],"meta":{"page":1,"page_size":20,"total_items":1,"total_pages":1}}'} />
+        <p><strong>Get one</strong> by ID, using the ID from the create response:</p>
+        <CodeBlock code="curl localhost:8080/api/v1/products/95e47695-0407-42cc-9365-00af8e5f445d" />
+        <p><strong>Update</strong> it. Fields you leave out stay unchanged:</p>
+        <CodeBlock code={`curl -X PUT localhost:8080/api/v1/products/95e47695-0407-42cc-9365-00af8e5f445d \\
+  -H 'Content-Type: application/json' \\
+  -d '{"stock":7}'`} />
+        <p><strong>Delete</strong> it:</p>
+        <CodeBlock code="curl -X DELETE localhost:8080/api/v1/products/95e47695-0407-42cc-9365-00af8e5f445d" />
+        <CodeBlock lang="text" title="response" code={'{"success":true,"data":{"deleted":true}}'} />
+        <p>Errors use the same envelope. Asking for the deleted product again returns <code>404</code>:</p>
+        <CodeBlock lang="text" title="response" code={'{"success":false,"error":{"code":"NOT_FOUND","message":"product not found"}}'} />
+        <p>Sending a create request without a <code>name</code> returns <code>400</code> with <code>BAD_REQUEST</code>, because the name is required.</p>
+
+        <H2>6. See how the layers fit</H2>
+        <p>A request flows inward: the handler calls the usecase, and the usecase calls the repository. Each layer depends only on the interface of the layer below it.</p>
+        <p>The <strong>domain</strong> declares what it needs from storage, with no database code:</p>
+        <CodeBlock lang="go" title="internal/domain/repository/product_repository.go" code={`type ProductRepository interface {
+	Create(ctx context.Context, item *entity.Product) error
+	GetByID(ctx context.Context, id uuid.UUID) (*entity.Product, error)
+	List(ctx context.Context, limit, offset int) ([]*entity.Product, int64, error)
+	Update(ctx context.Context, item *entity.Product) error
+	Delete(ctx context.Context, id uuid.UUID) error
+}`} />
+        <p>The <strong>usecase</strong> holds the business operations and works with plain input types:</p>
+        <CodeBlock lang="go" title="internal/usecase/interface/product_usecase.go" code={`type ProductUsecase interface {
+	Create(ctx context.Context, input types.CreateProductInput) (*entity.Product, error)
+	GetByID(ctx context.Context, id uuid.UUID) (*entity.Product, error)
+	List(ctx context.Context, page, pageSize int) ([]*entity.Product, int64, error)
+	Update(ctx context.Context, input types.UpdateProductInput) (*entity.Product, error)
+	Delete(ctx context.Context, id uuid.UUID) error
+}`} />
+        <p>The <strong>handler</strong> only translates HTTP into usecase calls and back:</p>
+        <CodeBlock lang="go" title="internal/delivery/http/handlers/product_handler.go" code={`type ProductHandler struct {
+	usecase usecase.ProductUsecase
+}`} />
+        <p>The GORM repository in <code>internal/infrastructure/persistence</code> implements the domain interface. <code>internal/infrastructure/container/container.go</code> builds them in order and passes each one inward through constructors, which is where goclean registered <code>Product</code> for you.</p>
+
+        <H2>7. Go further</H2>
+        <ul>
+          <li>Generate another feature, such as <code>goclean make:module Order total:float paid:bool</code>. It registers itself the same way.</li>
+          <li>Generate a single piece with <code>make:handler</code>, <code>make:usecase</code> or <code>make:migration</code>. See <Link to="/docs/available-commands">Available Commands</Link>.</li>
+          <li>Switch to PostgreSQL by creating the project with <code>--database postgres</code>, then run <code>docker compose up -d</code> before <code>make migrate</code>. See <Link to="/docs/docker-setup">Docker Setup</Link>.</li>
+          <li>Ship it with the <Link to="/docs/deployment">Deployment</Link> checklist.</li>
+        </ul>
       </>
     ),
   },
@@ -101,14 +220,26 @@ export const docs: DocPage[] = [
         <CodeBlock code={TREE} lang="text" title="my-saas" />
         <H2>Directories</H2>
         <ul>
-          <li><code>cmd/api</code> — the API entry point. Loads config, wires dependencies, starts the server.</li>
-          <li><code>internal/domain</code> — entities and repository interfaces.</li>
-          <li><code>internal/usecase</code> — application business rules.</li>
-          <li><code>internal/delivery</code> — HTTP handlers, DTOs and routes.</li>
-          <li><code>internal/infrastructure</code> — database, GORM repositories, logging.</li>
-          <li><code>migrations</code> — database migrations.</li>
+          <li><code>cmd/api</code> — the API entry point. Loads config and starts the server.</li>
+          <li><code>cmd/migrate</code> — runs database migrations up or down. Used by <code>make migrate</code>.</li>
+          <li><code>internal/domain</code> — <code>entity</code>, <code>errors</code> and <code>repository</code> interfaces.</li>
+          <li><code>internal/usecase</code> — <code>interface</code> declarations and their <code>implementation</code>.</li>
+          <li><code>internal/delivery/http</code> — <code>handlers</code>, <code>middleware</code> (CORS, request ID, logging, recovery), the JSON <code>response</code> helpers and <code>routes.go</code>.</li>
+          <li><code>internal/infrastructure</code> — the <code>container</code> that wires dependencies, plus <code>database</code>, GORM <code>persistence</code> repositories and the <code>server</code>.</li>
+          <li><code>internal/types</code> — request, input and response DTOs.</li>
+          <li><code>migrations</code> — numbered <code>.up.sql</code> and <code>.down.sql</code> files.</li>
           <li><code>config</code> — Viper configuration.</li>
-          <li><code>pkg</code> — small reusable packages.</li>
+          <li><code>pkg/logger</code> — the Zerolog logger.</li>
+        </ul>
+        <H2>Starter feature</H2>
+        <p>Every new project already includes a working <code>User</code> feature, a <code>/health</code> endpoint and an initial users migration, so you can run the server straight away.</p>
+        <H2>Root files</H2>
+        <ul>
+          <li><code>.env</code> and <code>.env.example</code> — environment settings.</li>
+          <li><code>.air.toml</code> — hot reload settings.</li>
+          <li><code>.goclean.json</code> — records your router, database and ORM so generators match your stack.</li>
+          <li><code>docker-compose.yml</code> — the database service, for PostgreSQL and MySQL projects.</li>
+          <li><code>Makefile</code> — <code>run</code>, <code>dev</code>, <code>build</code>, <code>migrate</code>, <code>migrate-down</code>, <code>test</code>, <code>tidy</code> and <code>clean</code>.</li>
         </ul>
       </>
     ),
@@ -130,7 +261,7 @@ export const docs: DocPage[] = [
         <H2>Infrastructure</H2>
         <p>Concrete implementations: database connections, GORM repositories, logging. It implements the interfaces declared by the domain.</p>
         <H2>Dependency injection</H2>
-        <p>Dependencies are constructed in <code>cmd/api</code> and passed inward through constructors, so each layer stays easy to test in isolation.</p>
+        <p>Dependencies are built in <code>internal/infrastructure/container</code> and passed inward through constructors, so each layer stays easy to test in isolation.</p>
       </>
     ),
   },
@@ -178,7 +309,8 @@ export const docs: DocPage[] = [
         <ul>
           <li><strong>Domain</strong> — the entity and repository interface.</li>
           <li><strong>Usecase</strong> — business logic for the module.</li>
-          <li><strong>Delivery</strong> — DTOs, handler and route registration.</li>
+          <li><strong>Types</strong> — request, input and response DTOs in <code>internal/types</code>.</li>
+          <li><strong>Delivery</strong> — the handler and route registration.</li>
           <li><strong>Infrastructure</strong> — the GORM repository implementation.</li>
           <li><strong>Migrations</strong> — a migration for the module's table.</li>
         </ul>
@@ -237,15 +369,16 @@ export const docs: DocPage[] = [
   },
   {
     slug: 'docker-setup', title: 'Docker Setup',
-    summary: 'Run the app and its database with Docker Compose.',
-    keywords: 'docker compose dockerfile container image up build',
+    summary: 'Run your local database with Docker Compose.',
+    keywords: 'docker compose container postgres mysql database up',
     body: (
       <>
-        <p>Every generated project includes a <code>Dockerfile</code> and a <code>docker-compose.yml</code>.</p>
-        <CodeBlock code="docker compose up --build" />
-        <p>Compose builds the API image and starts it together with its database service.</p>
+        <p>PostgreSQL and MySQL projects include a <code>docker-compose.yml</code> that defines the database service, with a named volume so your data survives restarts. SQLite projects do not need it.</p>
+        <CodeBlock code="docker compose up -d" />
+        <p>Then run <code>make migrate</code> and start the API with <code>make dev</code>. The API itself runs on your machine, not in a container.</p>
+        <Note>goclean does not generate a <code>Dockerfile</code>. To containerise the API, see <Link to="/docs/deployment">Deployment</Link>.</Note>
         <H2>Hot reload</H2>
-        <p>For fast local iteration without containers, use <strong>Air</strong>, which rebuilds and restarts the server when files change.</p>
+        <p><code>make dev</code> uses <strong>Air</strong>, which rebuilds and restarts the server when files change. Install it with <code>go install github.com/air-verse/air@latest</code>. Without Air, <code>make dev</code> falls back to <code>go run</code>.</p>
       </>
     ),
   },
@@ -256,8 +389,11 @@ export const docs: DocPage[] = [
     body: (
       <>
         <p>The generated server supports graceful shutdown, so it plays well with orchestrators that send termination signals during rollouts.</p>
-        <H2>Build an image</H2>
-        <CodeBlock code="docker build -t my-saas:latest ." />
+        <H2>Build the binary</H2>
+        <CodeBlock code="make build" />
+        <p>This writes the API binary to <code>bin/api</code>. Run migrations with <code>go run ./cmd/migrate up</code> or build <code>cmd/migrate</code> the same way.</p>
+        <H2>Containers</H2>
+        <p>goclean does not generate a <code>Dockerfile</code>, so add your own. A typical setup compiles <code>./cmd/api</code> in a Go build stage and copies the binary into a small runtime image. Pass configuration through environment variables.</p>
         <H2>Checklist</H2>
         <ul>
           <li>Provide production configuration and secrets through your platform, not committed files.</li>

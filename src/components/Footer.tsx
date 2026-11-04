@@ -17,8 +17,10 @@ export function Footer() {
           <h2 className="text-xs font-medium uppercase tracking-widest text-fg">Resources</h2>
           <ul className="mt-4 space-y-2.5">
             <li><Link className={a} to="/docs/introduction">Documentation</Link></li>
+            <li><Link className={a} to="/faq">FAQ</Link></li>
             <li><Link className={a} to="/about">About</Link></li>
             <li><Link className={a} to="/changelog">Changelog</Link></li>
+            <li><Link className={a} to="/contributing">Contributing</Link></li>
             <li><a className={a} href={REPO} target="_blank" rel="noreferrer">GitHub</a></li>
             <li><a className={a} href={PKG} target="_blank" rel="noreferrer">Package Reference</a></li>
           </ul>
@@ -27,6 +29,7 @@ export function Footer() {
           <h2 className="text-xs font-medium uppercase tracking-widest text-fg">Project</h2>
           <ul className="mt-4 space-y-2.5 text-sm text-muted">
             <li><a className={a} href={`${REPO}/blob/main/LICENSE`} target="_blank" rel="noreferrer">MIT License</a></li>
+            <li><Link className={a} to="/privacy">Privacy</Link></li>
             <li>Version <span className="font-mono">{VERSION}</span></li>
           </ul>
         </div>
