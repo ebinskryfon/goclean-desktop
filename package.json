@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },
@@ -26,7 +26,7 @@
     "typescript": "~7.0.2",
     "vite": "^8.3.5"
   },
-  "description": "goclean \u2014 documentation and website, as a desktop app",
+  "description": "goclean — documentation and website, as a desktop app",
   "author": {
     "name": "ebinskryfon",
     "email": "skryfon@gmail.com"

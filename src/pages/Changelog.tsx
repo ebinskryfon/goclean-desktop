@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react'
 import { usePageTitle } from '../lib/hooks'
 import { Reveal } from '../components/Reveal'
 import { REPO } from '../lib/site'
+import { CHANGELOG_DESC } from '../lib/routes'
 
 type Release = { version: string; date: string; summary: string; changes: { type: 'feat' | 'fix'; text: string }[] }
 
@@ -33,7 +34,7 @@ const badge = {
 const label = { feat: 'New', fix: 'Fix' } as const
 
 export default function Changelog() {
-  usePageTitle('Changelog', 'Release history for goclean, the open-source Go CLI for Clean Architecture backends.')
+  usePageTitle('Changelog', CHANGELOG_DESC)
   return (
     <main className="mx-auto max-w-4xl px-5 pb-24 pt-20">
       <Reveal>

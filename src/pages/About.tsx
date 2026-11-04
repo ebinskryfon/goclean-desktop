@@ -5,6 +5,7 @@ import { usePageTitle } from '../lib/hooks'
 import { Section } from '../components/Section'
 import { Reveal } from '../components/Reveal'
 import { PKG, REPO, VERSION } from '../lib/site'
+import { ABOUT_DESC } from '../lib/routes'
 
 const principles: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: Layers, title: 'Structure first', body: 'Folder layout and dependency direction are decided on day one, so the codebase stays readable as it grows.' },
@@ -21,7 +22,7 @@ const stats = [
 ]
 
 export default function About() {
-  usePageTitle('About', 'About goclean: an open-source Go CLI that scaffolds Clean Architecture backends with Gin or Chi, GORM, Docker and more.')
+  usePageTitle('About', ABOUT_DESC)
   return (
     <>
       <header className="mx-auto max-w-6xl px-5 pb-20 pt-20">

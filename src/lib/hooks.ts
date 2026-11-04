@@ -29,7 +29,7 @@ export function useCopy(text: string) {
 
 export function useTheme() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() =>
-    document.documentElement.dataset.theme === 'light' ? 'light' : 'dark',
+    typeof document !== 'undefined' && document.documentElement.dataset.theme === 'light' ? 'light' : 'dark',
   )
   const toggle = useCallback(() => {
     setTheme((t) => {
