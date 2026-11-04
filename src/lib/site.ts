@@ -11,4 +11,4 @@ export const SETUP_FILES = {
   windows: `${SETUP}/goclean-setup-windows.exe`,
   darwin: `${SETUP}/goclean-setup-macos.dmg`,
 } as const
-export const SITE_URL = 'https://goclean.cloud'
+export const SITE_URL = 'https://www.goclean.cloud'

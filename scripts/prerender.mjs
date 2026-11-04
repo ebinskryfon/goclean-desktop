@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile, rm } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const SITE = 'https://goclean.cloud'
+const SITE = 'https://www.goclean.cloud'
 const root = resolve(import.meta.dirname, '..')
 const dist = join(root, 'dist')
 const serverDir = join(root, 'dist-server')
@@ -41,7 +41,7 @@ function build({ url, title, description, canonical, robots }) {
 }
 
 for (const r of routes) {
-  const canonical = `${SITE}${r.path === '/' ? '/' : r.path}`
+  const canonical = `${SITE}${r.path === '/' ? '/' : r.path + '/'}`
   const html = build({ url: r.path, title: r.title, description: r.description, canonical })
   const file = r.path === '/' ? join(dist, 'index.html') : join(dist, r.path, 'index.html')
   await mkdir(dirname(file), { recursive: true })

@@ -1,91 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://goclean.cloud/</loc>
+    <loc>https://www.goclean.cloud/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/about</loc>
+    <loc>https://www.goclean.cloud/about/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/changelog</loc>
+    <loc>https://www.goclean.cloud/changelog/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/introduction</loc>
+    <loc>https://www.goclean.cloud/docs/introduction/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/installation</loc>
+    <loc>https://www.goclean.cloud/docs/installation/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/quick-start</loc>
+    <loc>https://www.goclean.cloud/docs/quick-start/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/project-structure</loc>
+    <loc>https://www.goclean.cloud/docs/project-structure/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/architecture</loc>
+    <loc>https://www.goclean.cloud/docs/architecture/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/configuration</loc>
+    <loc>https://www.goclean.cloud/docs/configuration/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/database-setup</loc>
+    <loc>https://www.goclean.cloud/docs/database-setup/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/module-generation</loc>
+    <loc>https://www.goclean.cloud/docs/module-generation/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/available-commands</loc>
+    <loc>https://www.goclean.cloud/docs/available-commands/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/docker-setup</loc>
+    <loc>https://www.goclean.cloud/docs/docker-setup/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/deployment</loc>
+    <loc>https://www.goclean.cloud/docs/deployment/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goclean.cloud/docs/troubleshooting</loc>
+    <loc>https://www.goclean.cloud/docs/troubleshooting/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

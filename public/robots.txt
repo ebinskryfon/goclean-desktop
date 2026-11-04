@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://goclean.cloud/sitemap.xml
+Sitemap: https://www.goclean.cloud/sitemap.xml
