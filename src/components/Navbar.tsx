@@ -11,6 +11,7 @@ const links = [
   { label: 'Download', to: '/#download' },
   { label: 'Features', to: '/#features' },
   { label: 'Commands', to: '/#commands' },
+  { label: 'About', to: '/about' },
 ]
 
 export function Navbar() {
@@ -38,7 +39,7 @@ export function Navbar() {
               {l.to.includes('#') ? (
                 <Link to={l.to} className={linkCls}>{l.label}</Link>
               ) : (
-                <NavLink to={l.to} end={l.to === '/'} className={({ isActive }) => `${linkCls} ${isActive && (l.to === '/' || l.label === 'Documentation') ? '!text-fg' : ''}`}>
+                <NavLink to={l.to} end={l.to === '/'} className={({ isActive }) => `${linkCls} ${isActive && (l.to === '/' || l.label === 'Documentation' || l.label === 'About') ? '!text-fg' : ''}`}>
                   {l.label}
                 </NavLink>
               )}

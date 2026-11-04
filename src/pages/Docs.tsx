@@ -14,7 +14,7 @@ export default function Docs() {
   const searchRef = useRef<HTMLInputElement>(null)
   const articleRef = useRef<HTMLElement>(null)
 
-  usePageTitle(page?.title)
+  usePageTitle(page?.title, page?.summary)
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

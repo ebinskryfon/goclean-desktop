@@ -4,6 +4,9 @@ import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import Home from './pages/Home'
 import Docs from './pages/Docs'
+import About from './pages/About'
+import Changelog from './pages/Changelog'
+import NotFound from './pages/NotFound'
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation()
@@ -23,9 +26,11 @@ export default function App() {
       <div id="main">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/changelog" element={<Changelog />} />
           <Route path="/docs" element={<Navigate to="/docs/introduction" replace />} />
           <Route path="/docs/:slug" element={<Docs />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />

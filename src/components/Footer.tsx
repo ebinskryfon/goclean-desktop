@@ -17,6 +17,8 @@ export function Footer() {
           <h2 className="text-xs font-medium uppercase tracking-widest text-fg">Resources</h2>
           <ul className="mt-4 space-y-2.5">
             <li><Link className={a} to="/docs/introduction">Documentation</Link></li>
+            <li><Link className={a} to="/about">About</Link></li>
+            <li><Link className={a} to="/changelog">Changelog</Link></li>
             <li><a className={a} href={REPO} target="_blank" rel="noreferrer">GitHub</a></li>
             <li><a className={a} href={PKG} target="_blank" rel="noreferrer">Package Reference</a></li>
           </ul>

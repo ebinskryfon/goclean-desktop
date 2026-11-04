@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { track } from './track'
+import { SITE_URL } from './site'
 
 export function useCopy(text: string) {
   const [copied, setCopied] = useState(false)
@@ -41,10 +42,26 @@ export function useTheme() {
   return { theme, toggle }
 }
 
-export function usePageTitle(title?: string) {
+export function usePageTitle(title?: string, description?: string) {
   useEffect(() => {
     document.title = title ? `${title} — goclean` : 'goclean — Start clean. Build faster. Ship better.'
-  }, [title])
+    const path = window.location.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/'
+    const url = `${SITE_URL}${path === '/' ? '/' : path.replace(/\/$/, '')}`
+    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (!link) {
+      link = document.createElement('link')
+      link.rel = 'canonical'
+      document.head.appendChild(link)
+    }
+    link.href = url
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', url)
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', document.title)
+    if (description) {
+      document.querySelector('meta[name="description"]')?.setAttribute('content', description)
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description)
+    }
+  }, [title, description])
 }
 
 export function prefersReducedMotion() {
