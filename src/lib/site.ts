@@ -1,4 +1,4 @@
-export const VERSION = 'v1.1.1'
+export const VERSION = 'v1.2.0'
 export const REPO = 'https://github.com/ebinskryfon/goclean'
 export const PKG = 'https://pkg.go.dev/github.com/ebinskryfon/goclean'
 export const INSTALL_CMD = 'go install github.com/ebinskryfon/goclean@latest'

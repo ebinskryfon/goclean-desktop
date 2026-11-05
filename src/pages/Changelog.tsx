@@ -9,6 +9,17 @@ type Release = { version: string; date: string; summary: string; changes: { type
 // Newest first. Mirrors the published GitHub releases.
 const releases: Release[] = [
   {
+    version: 'v1.2.0',
+    date: '2026-11-04',
+    summary: 'Generated projects now ship with a Dockerfile, and goclean gains install scripts.',
+    changes: [
+      { type: 'feat', text: 'New projects include a Dockerfile and .dockerignore.' },
+      { type: 'feat', text: 'Install scripts for Linux/macOS (install.sh) and Windows (install.ps1).' },
+      { type: 'fix', text: 'Generated Go files are now gofmt-formatted before being written.' },
+      { type: 'fix', text: 'Hardened the generated Dockerfile: go.sum handling, SQLite data directory and image tag.' },
+    ],
+  },
+  {
     version: 'v1.1.1',
     date: '2026-11-02',
     summary: 'Patch release following v1.1.0.',

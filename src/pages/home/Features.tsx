@@ -11,7 +11,7 @@ const features: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: Settings2, title: 'Configuration', body: 'Viper-based configuration, loaded once and injected where it is needed.' },
   { icon: ScrollText, title: 'Structured logging', body: 'Zerolog integration with fast, leveled, structured output.' },
   { icon: Power, title: 'Graceful shutdown', body: 'A production-friendly server lifecycle that drains requests before exit.' },
-  { icon: Container, title: 'Docker Compose', body: 'A ready-to-run Docker Compose file for your PostgreSQL or MySQL database.' },
+  { icon: Container, title: 'Docker Compose', body: 'A Dockerfile for the API and a ready-to-run Compose file for your PostgreSQL or MySQL database.' },
   { icon: RefreshCw, title: 'Hot reload', body: 'Air integration so changes rebuild and restart the server automatically.' },
   { icon: Eye, title: 'Dry run', body: 'Preview every file goclean would create before anything touches your disk.' },
 ]

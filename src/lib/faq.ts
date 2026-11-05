@@ -67,7 +67,7 @@ export const faq: FaqGroup[] = [
       },
       {
         q: 'What else is included in a generated project?',
-        a: 'Viper configuration, Zerolog structured logging, graceful shutdown, a working User feature with a health endpoint, middleware, migrations, a Docker Compose file for PostgreSQL and MySQL, Air hot reload and a Makefile.',
+        a: 'Viper configuration, Zerolog structured logging, graceful shutdown, a working User feature with a health endpoint, middleware, migrations, a Dockerfile, a Docker Compose file for PostgreSQL and MySQL, Air hot reload and a Makefile.',
         link: { to: '/docs/project-structure', label: 'Project structure' },
       },
       {
@@ -86,7 +86,7 @@ export const faq: FaqGroup[] = [
     items: [
       {
         q: 'Can I deploy a goclean project to production?',
-        a: 'Yes. The generated server shuts down gracefully, so it fits container platforms and orchestrators. goclean does not generate a Dockerfile, so add your own. Provide secrets through your platform and run migrations before starting a new version.',
+        a: 'Yes. The generated server shuts down gracefully, so it fits container platforms and orchestrators. New projects include a multi-stage Dockerfile and .dockerignore. Provide secrets through your platform and run migrations before starting a new version.',
         link: { to: '/docs/deployment', label: 'Deployment checklist' },
       },
       {

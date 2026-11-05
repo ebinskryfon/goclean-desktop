@@ -35,6 +35,8 @@ const TREE = `my-saas/
 ├── .air.toml
 ├── .env
 ├── .goclean.json
+├── .dockerignore
+├── Dockerfile
 ├── docker-compose.yml
 ├── Makefile
 └── go.mod`
@@ -54,7 +56,7 @@ export const docs: DocPage[] = [
           <li>Your choice of HTTP framework: Gin or Chi.</li>
           <li>PostgreSQL, MySQL or SQLite through GORM.</li>
           <li>Viper configuration, Zerolog logging and graceful shutdown.</li>
-          <li>A Docker Compose file for the database (PostgreSQL and MySQL), Air hot reload and a Makefile.</li>
+          <li>A Dockerfile for the API, a Docker Compose file for the database (PostgreSQL and MySQL), Air hot reload and a Makefile.</li>
           <li>A module generator for entities, DTOs, repositories, usecases, handlers, migrations and routes.</li>
         </ul>
         <H2>Next steps</H2>
@@ -238,6 +240,7 @@ export const docs: DocPage[] = [
           <li><code>.env</code> and <code>.env.example</code> — environment settings.</li>
           <li><code>.air.toml</code> — hot reload settings.</li>
           <li><code>.goclean.json</code> — records your router, database and ORM so generators match your stack.</li>
+          <li><code>Dockerfile</code> and <code>.dockerignore</code> — a multi-stage build for the API.</li>
           <li><code>docker-compose.yml</code> — the database service, for PostgreSQL and MySQL projects.</li>
           <li><code>Makefile</code> — <code>run</code>, <code>dev</code>, <code>build</code>, <code>migrate</code>, <code>migrate-down</code>, <code>test</code>, <code>tidy</code> and <code>clean</code>.</li>
         </ul>
@@ -376,7 +379,7 @@ export const docs: DocPage[] = [
         <p>PostgreSQL and MySQL projects include a <code>docker-compose.yml</code> that defines the database service, with a named volume so your data survives restarts. SQLite projects do not need it.</p>
         <CodeBlock code="docker compose up -d" />
         <p>Then run <code>make migrate</code> and start the API with <code>make dev</code>. The API itself runs on your machine, not in a container.</p>
-        <Note>goclean does not generate a <code>Dockerfile</code>. To containerise the API, see <Link to="/docs/deployment">Deployment</Link>.</Note>
+        <Note>The Compose file only defines the database. The project also includes a <code>Dockerfile</code> for the API itself. See <Link to="/docs/deployment">Deployment</Link>.</Note>
         <H2>Hot reload</H2>
         <p><code>make dev</code> uses <strong>Air</strong>, which rebuilds and restarts the server when files change. Install it with <code>go install github.com/air-verse/air@latest</code>. Without Air, <code>make dev</code> falls back to <code>go run</code>.</p>
       </>
@@ -393,7 +396,9 @@ export const docs: DocPage[] = [
         <CodeBlock code="make build" />
         <p>This writes the API binary to <code>bin/api</code>. Run migrations with <code>go run ./cmd/migrate up</code> or build <code>cmd/migrate</code> the same way.</p>
         <H2>Containers</H2>
-        <p>goclean does not generate a <code>Dockerfile</code>, so add your own. A typical setup compiles <code>./cmd/api</code> in a Go build stage and copies the binary into a small runtime image. Pass configuration through environment variables.</p>
+        <p>New projects include a multi-stage <code>Dockerfile</code> and a <code>.dockerignore</code>. The build stage compiles <code>./cmd/api</code> and <code>./cmd/migrate</code>, and the runtime stage is a small Alpine image that runs as a non-root user and listens on port 8080. SQLite projects store the database in a <code>/data</code> volume.</p>
+        <CodeBlock code={'docker build -t myapp .\ndocker run -p 8080:8080 --env-file .env myapp'} />
+        <p>Pass configuration through environment variables. For PostgreSQL or MySQL, point the container at your database through the same settings as your <code>.env</code> file.</p>
         <H2>Checklist</H2>
         <ul>
           <li>Provide production configuration and secrets through your platform, not committed files.</li>
