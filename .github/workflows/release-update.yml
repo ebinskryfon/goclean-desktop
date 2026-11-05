@@ -1,0 +1,49 @@
+name: Update site for new release
+on:
+  repository_dispatch:
+    types: [goclean-release]
+  workflow_dispatch:
+    inputs:
+      tag: { description: 'Release tag, e.g. v1.2.0', required: true }
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - name: Fetch release (manual runs)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "${{ inputs.tag }}" -R ebinskryfon/goclean --json tagName,publishedAt,body > release.json
+          echo "TAG=$(jq -r .tagName release.json)" >> "$GITHUB_ENV"
+          echo "DATE=$(jq -r '.publishedAt[:10]' release.json)" >> "$GITHUB_ENV"
+          { echo 'BODY<<EOF_BODY'; jq -r .body release.json; echo 'EOF_BODY'; } >> "$GITHUB_ENV"
+      - name: Read release (dispatch)
+        if: github.event_name == 'repository_dispatch'
+        env:
+          P_TAG: ${{ github.event.client_payload.tag }}
+          P_DATE: ${{ github.event.client_payload.date }}
+          P_BODY: ${{ github.event.client_payload.body }}
+        run: |
+          echo "TAG=$P_TAG" >> "$GITHUB_ENV"
+          echo "DATE=$P_DATE" >> "$GITHUB_ENV"
+          { echo 'BODY<<EOF_BODY'; printf '%s\n' "$P_BODY"; echo 'EOF_BODY'; } >> "$GITHUB_ENV"
+      - run: node scripts/bump-release.mjs
+      - run: npm ci && npm run build
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: release/${{ env.TAG }}
+          title: Update site for ${{ env.TAG }}
+          commit-message: Update site for goclean ${{ env.TAG }}
+          body: |
+            Automated update for goclean ${{ env.TAG }}.
+
+            Before merging:
+            - [ ] Replace the `TODO` summary in `src/pages/Changelog.tsx`.
+            - [ ] Check whether the release changes behavior described in the docs or FAQ.
