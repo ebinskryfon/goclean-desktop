@@ -5,7 +5,7 @@ export const DEFAULT_DESC = 'goclean is an open-source Go CLI that scaffolds pro
 export const ABOUT_DESC = 'About goclean: an open-source Go CLI that scaffolds Clean Architecture backends with Gin or Chi, GORM and more.'
 export const FAQ_DESC = 'Answers to common questions about goclean: installation, Gin vs Chi, supported databases, module generation and deployment.'
 export const PRIVACY_DESC = 'What the goclean website collects: no cookies, no accounts, and a visitor map that stores only coarse location counts, never IP addresses.'
-export const CONTRIBUTING_DESC = 'How to report bugs, suggest features and send pull requests to goclean and its website, including local setup.'
+export const CONTRIBUTING_DESC = 'How to report bugs, suggest features and send pull requests to goclean.'
 export const CHANGELOG_DESC = 'Release history for goclean, the open-source Go CLI for Clean Architecture backends.'
 
 export type RouteMeta = { path: string; title: string; description: string }
