@@ -9,7 +9,7 @@ export default function Privacy() {
   usePageTitle('Privacy', PRIVACY_DESC)
   return (
     <Article eyebrow="Legal" title="Privacy" summary="What this site collects, what it does not, and why.">
-      <p>This is the website for goclean. It has no accounts, no forms, no advertising and no third-party analytics. This page describes the small amount of data involved in running it.</p>
+      <p>This is the website for goclean. It has no accounts, no forms, no advertising. It uses Google Tag Manager for anonymous usage statistics. This page describes the small amount of data involved in running it.</p>
 
       <H2>The visitor map</H2>
       <p>The home page shows a map of where goclean is being downloaded. When you click a download button or copy an install command, your browser sends a short message to a small Cloudflare Worker saying which of those two things happened.</p>
@@ -26,11 +26,12 @@ export default function Privacy() {
         <li><strong>Theme preference.</strong> Your light or dark choice is saved in local storage so the site remembers it. It never leaves your device.</li>
         <li><strong>Session flags.</strong> Session storage notes that a download or copy event was already reported, so it is not sent twice. It is cleared when you close the tab.</li>
       </ul>
-      <p>The site sets no cookies.</p>
+      <p>The site itself sets no cookies, but Google Tag Manager and any tags it loads may set their own.</p>
 
       <H2>Third parties</H2>
       <ul>
         <li><strong>Google Fonts.</strong> Pages load the Inter and JetBrains Mono fonts from Google, so Google receives your IP address and browser details as part of that request.</li>
+        <li><strong>Google Tag Manager.</strong> Pages load a Google tag, so Google receives your IP address and browser details and may use cookies to measure site usage.</li>
         <li><strong>GitHub.</strong> The site is hosted on GitHub Pages, and download buttons and install scripts point to GitHub. GitHub may keep standard server logs under its own privacy policy.</li>
         <li><strong>Cloudflare.</strong> The map Worker runs on Cloudflare, which processes the request as it would for any site it serves.</li>
       </ul>
