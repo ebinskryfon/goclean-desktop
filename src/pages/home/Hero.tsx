@@ -2,7 +2,7 @@ import { Link } from '../../components/SiteLink'
 import { ArrowRight, Download } from 'lucide-react'
 import { Terminal } from '../../components/Terminal'
 import { GithubIcon } from '../../components/GithubIcon'
-import { REPO, VERSION } from '../../lib/site'
+import { REPO } from '../../lib/site'
 
 export function Hero() {
   return (
@@ -11,8 +11,8 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-6xl gap-14 px-5 pb-24 pt-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pt-24">
         <div>
           <Link to="/docs/introduction" className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-xs text-muted transition hover:text-fg">
-            <span className="font-mono text-accent">{VERSION}</span>
-            <span>Open source · MIT licensed</span>
+            <span className="font-mono text-accent">Coming soon</span>
+            <span>Under release development · Stay tuned</span>
           </Link>
           <h1 className="mt-7 text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-fg sm:text-6xl xl:text-[4.25rem]">
             Your Go backend.<br />

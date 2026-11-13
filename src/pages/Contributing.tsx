@@ -9,17 +9,17 @@ export default function Contributing() {
   usePageTitle('Contributing', CONTRIBUTING_DESC)
   return (
     <Article eyebrow="Open source" title="Contributing" summary="How to report a bug, suggest an idea, or send a pull request.">
-      <p>goclean is MIT licensed and developed in the open. Bug reports, fixes, documentation improvements and ideas are all welcome.</p>
+      <p>gostrata is MIT licensed and developed in the open. Bug reports, fixes, documentation improvements and ideas are all welcome.</p>
 
       <H2>Where to start</H2>
-      <p>Everything happens in the <a href={REPO} target="_blank" rel="noreferrer">goclean repository</a> on GitHub. Open issues and pull requests there, whether they concern the CLI or its documentation.</p>
+      <p>Everything happens in the <a href={REPO} target="_blank" rel="noreferrer">gostrata repository</a> on GitHub. Open issues and pull requests there, whether they concern the CLI or its documentation.</p>
 
       <H2>Reporting a bug</H2>
       <p>Open an issue and include:</p>
       <ul>
         <li>The exact command you ran, with flags, and the output.</li>
-        <li>Your goclean version (<code>goclean version</code>) and operating system.</li>
-        <li>The result of <code>goclean doctor</code>.</li>
+        <li>Your gostrata version (<code>gostrata version</code>) and operating system.</li>
+        <li>The result of <code>gostrata doctor</code>.</li>
         <li>What you expected to happen instead.</li>
       </ul>
       <p>Check <Link to="/docs/troubleshooting">Troubleshooting</Link> and existing issues first.</p>
@@ -34,7 +34,7 @@ export default function Contributing() {
         <li>Make sure the existing tests still pass.</li>
         <li>Describe what changed and why. Add screenshots for visual changes.</li>
       </ul>
-      <p>By contributing, you agree that your work is released under the project's <a href={`${REPO}/blob/main/LICENSE`} target="_blank" rel="noreferrer">MIT License</a>.</p>
+      <p>By contributing, you agree that your work is released under the project's <a href={REPO} target="_blank" rel="noreferrer">MIT License</a>.</p>
     </Article>
   )
 }

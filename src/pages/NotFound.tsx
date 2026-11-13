@@ -27,7 +27,7 @@ export default function NotFound() {
         The page you asked for doesn't exist or has moved. Check the address, or head to one of the places below.
       </p>
       <pre className="mt-8 max-w-xl overflow-x-auto rounded-lg border border-line bg-surface p-5 font-mono text-sm leading-relaxed text-muted" aria-hidden="true">
-{`$ goclean open `}<span className="text-fg">{pathname}</span>{`
+{`$ gostrata open `}<span className="text-fg">{pathname}</span>{`
 `}<span className="text-accent">error:</span>{` no such route`}
       </pre>
       <div className="mt-8 flex flex-wrap gap-3">

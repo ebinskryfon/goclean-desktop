@@ -44,7 +44,7 @@ export function useTheme() {
 
 export function usePageTitle(title?: string, description?: string) {
   useEffect(() => {
-    document.title = title ? `${title} — goclean` : 'goclean — Start clean. Build faster. Ship better.'
+    document.title = title ? `${title} — gostrata` : 'gostrata — Start clean. Build faster. Ship better.'
     const path = window.location.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/'
     const url = `${SITE_URL}${path === '/' ? '/' : path.replace(/\/$/, '') + '/'}`
     let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')

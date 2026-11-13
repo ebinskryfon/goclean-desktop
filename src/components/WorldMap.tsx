@@ -53,7 +53,7 @@ export function WorldMap() {
 
   return (
     <div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`World map showing ${cells.length} locations where goclean was downloaded or copied`}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`World map showing ${cells.length} locations where gostrata was downloaded or copied`}>
         <path d={landPath} className="fill-muted" opacity="0.28" />
         {cells.map((d) => (
           <g key={`${d.c},${d.r}`}>
@@ -68,7 +68,7 @@ export function WorldMap() {
         {TRACK_URL
           ? total > 0
             ? `${total} downloads and copies from ${cells.length} regions. Locations are approximate (about 300 km); no IP addresses are stored.`
-            : 'Be the first dot on the map: download goclean or copy an install command.'
+            : 'Be the first dot on the map: download gostrata or copy an install command.'
           : 'Live map is not connected yet.'}
       </p>
     </div>

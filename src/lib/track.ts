@@ -1,8 +1,8 @@
-// Reports "download" / "copy" events to the goclean map worker (see /worker).
+// Reports "download" / "copy" events to the gostrata map worker (see /worker).
 // Disabled unless VITE_TRACK_URL is set. No IP or personal data is sent from the browser;
 // the worker only keeps a coarse (3°) location cell.
 export const TRACK_URL: string = (import.meta.env.VITE_TRACK_URL ?? '').replace(/\/$/, '')
-export const TRACK_EVENT = 'goclean:tracked'
+export const TRACK_EVENT = 'gostrata:tracked'
 
 export type TrackType = 'download' | 'copy'
 

@@ -7,13 +7,13 @@ import { prefersReducedMotion } from '../lib/hooks'
 type Line = { kind: 'comment' | 'cmd' | 'out'; text: string }
 
 const LINES: Line[] = [
-  { kind: 'comment', text: '# Install goclean' },
-  { kind: 'cmd', text: 'go install github.com/ebinskryfon/goclean@latest' },
+  { kind: 'comment', text: '# Install gostrata' },
+  { kind: 'cmd', text: 'go install github.com/skryfon/gostrata@latest' },
   { kind: 'comment', text: '# Create a project' },
-  { kind: 'cmd', text: 'goclean new my-saas' },
+  { kind: 'cmd', text: 'gostrata new my-saas' },
   { kind: 'out', text: '✓ Project my-saas created' },
   { kind: 'comment', text: '# Generate a module' },
-  { kind: 'cmd', text: 'goclean make:module Product name:string price:float stock:int' },
+  { kind: 'cmd', text: 'gostrata make:module Product name:string price:float stock:int' },
   { kind: 'out', text: '✓ Module Product generated' },
 ]
 

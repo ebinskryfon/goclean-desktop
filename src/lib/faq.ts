@@ -6,13 +6,13 @@ export const faq: FaqGroup[] = [
     title: 'The basics',
     items: [
       {
-        q: 'What is goclean?',
-        a: 'goclean is an open-source command-line tool that scaffolds structured Go backend projects using Clean Architecture. One command gives you the layers, wiring, configuration, Docker files and tooling already in place.',
+        q: 'What is gostrata?',
+        a: 'gostrata is an open-source command-line tool that scaffolds structured Go backend projects using Clean Architecture. One command gives you the layers, wiring, configuration, Docker files and tooling already in place.',
         link: { to: '/docs/introduction', label: 'Read the introduction' },
       },
       {
-        q: 'Is goclean free?',
-        a: 'Yes. goclean is MIT licensed, free to use in personal and commercial projects, and developed in the open on GitHub.',
+        q: 'Is gostrata free?',
+        a: 'Yes. gostrata is MIT licensed, free to use in personal and commercial projects, and developed in the open on GitHub.',
       },
       {
         q: 'Why use Clean Architecture in Go?',
@@ -20,8 +20,8 @@ export const faq: FaqGroup[] = [
         link: { to: '/docs/architecture', label: 'See the four layers' },
       },
       {
-        q: 'How is goclean different from copying a template repository?',
-        a: 'A template needs manual renaming and cleanup, and it cannot grow with your app. goclean asks for your stack, generates a project with your module path, and then keeps generating new modules (entity, DTOs, repository, usecase, handler, migration and routes) that match the same structure.',
+        q: 'How is gostrata different from copying a template repository?',
+        a: 'A template needs manual renaming and cleanup, and it cannot grow with your app. gostrata asks for your stack, generates a project with your module path, and then keeps generating new modules (entity, DTOs, repository, usecase, handler, migration and routes) that match the same structure.',
       },
     ],
   },
@@ -29,13 +29,13 @@ export const faq: FaqGroup[] = [
     title: 'Installing and using it',
     items: [
       {
-        q: 'How do I install goclean?',
+        q: 'How do I install gostrata?',
         a: 'On Linux and macOS run the install script, on Windows run the PowerShell script, or use go install. You can also download a release archive manually. Every release publishes a checksums.txt file.',
         link: { to: '/docs/installation', label: 'Installation guide' },
       },
       {
-        q: 'Do I need Go installed to use goclean?',
-        a: 'Not to install the binary. You do need Go 1.23 or newer to build and run the projects it generates. Run goclean doctor to check that Go, git and Docker are present and recent enough.',
+        q: 'Do I need Go installed to use gostrata?',
+        a: 'Not to install the binary. You do need Go 1.23 or newer to build and run the projects it generates. Run gostrata doctor to check that Go, git and Docker are present and recent enough.',
       },
       {
         q: 'Which operating systems are supported?',
@@ -43,11 +43,11 @@ export const faq: FaqGroup[] = [
       },
       {
         q: 'How do I create my first project?',
-        a: 'Run goclean new my-app, then goclean make:module Product name:string price:float to generate your first feature module. Start the server with Air for hot reload.',
+        a: 'Run gostrata new my-app, then gostrata make:module Product name:string price:float to generate your first feature module. Start the server with Air for hot reload.',
         link: { to: '/docs/quick-start', label: 'Quick Start' },
       },
       {
-        q: 'Can I preview what goclean will generate?',
+        q: 'Can I preview what gostrata will generate?',
         a: 'Yes. Add --dry-run to any command to list the files it would create without writing anything. Use --force only when you want to overwrite existing files.',
         link: { to: '/docs/available-commands', label: 'Command reference' },
       },
@@ -72,7 +72,7 @@ export const faq: FaqGroup[] = [
       },
       {
         q: 'What does make:module generate?',
-        a: 'For each module it generates the domain entity and repository interface, the usecase, DTOs, handler and route registration, the GORM repository, and a migration. Use --no-register if you do not want goclean to patch container.go and routes.go.',
+        a: 'For each module it generates the domain entity and repository interface, the usecase, DTOs, handler and route registration, the GORM repository, and a migration. Use --no-register if you do not want gostrata to patch container.go and routes.go.',
         link: { to: '/docs/module-generation', label: 'Module generation' },
       },
       {
@@ -85,17 +85,17 @@ export const faq: FaqGroup[] = [
     title: 'Deploying and getting help',
     items: [
       {
-        q: 'Can I deploy a goclean project to production?',
+        q: 'Can I deploy a gostrata project to production?',
         a: 'Yes. The generated server shuts down gracefully, so it fits container platforms and orchestrators. New projects include a multi-stage Dockerfile and .dockerignore. Provide secrets through your platform and run migrations before starting a new version.',
         link: { to: '/docs/deployment', label: 'Deployment checklist' },
       },
       {
-        q: 'I get "goclean: command not found". What do I do?',
+        q: 'I get "gostrata: command not found". What do I do?',
         a: 'The Go bin directory is probably not on your PATH. Add $(go env GOPATH)/bin to it, or restart your terminal after using the Windows installer.',
         link: { to: '/docs/troubleshooting', label: 'Troubleshooting' },
       },
       {
-        q: 'How do I upgrade goclean?',
+        q: 'How do I upgrade gostrata?',
         a: 'Run the install command again. It always fetches the newest release. See the changelog for what changed.',
         link: { to: '/changelog', label: 'Changelog' },
       },

@@ -6,7 +6,7 @@ export function Logo({ size = 28 }: { size?: number }) {
   return (
     <span className="inline-flex items-center gap-2.5">
       <LogoMark size={size} />
-      <span className="text-[1.15rem] font-semibold tracking-tight text-fg">goclean</span>
+      <span className="text-[1.15rem] font-semibold tracking-tight text-fg">gostrata</span>
     </span>
   )
 }

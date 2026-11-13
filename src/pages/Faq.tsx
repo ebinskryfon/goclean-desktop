@@ -16,7 +16,7 @@ export default function Faq() {
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">FAQ</p>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-fg sm:text-5xl">Frequently asked questions</h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">
-            Quick answers about installing goclean, the stack it generates and how it fits into your workflow.
+            Quick answers about installing gostrata, the stack it generates and how it fits into your workflow.
           </p>
         </Reveal>
       </header>
@@ -50,7 +50,7 @@ export default function Faq() {
           <h2 className="text-lg font-medium text-fg">Still have a question?</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted">Check the documentation, or ask on GitHub and we will help.</p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <a href={`${REPO}/issues`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-[#04101c] transition hover:opacity-90"><Code2 size={16} /> Ask on GitHub</a>
+            <a href={REPO} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-[#04101c] transition hover:opacity-90"><Code2 size={16} /> Ask on GitHub</a>
             <Link to="/docs/introduction" className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-medium text-fg transition hover:bg-surface">Read the docs <ArrowRight size={16} /></Link>
           </div>
         </div>

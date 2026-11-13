@@ -11,6 +11,8 @@ import Contributing from './pages/Contributing'
 import Privacy from './pages/Privacy'
 import Changelog from './pages/Changelog'
 import NotFound from './pages/NotFound'
+import Maintenance from './pages/Maintenance'
+import { MAINTENANCE } from './lib/site'
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation()
@@ -22,6 +24,7 @@ function ScrollToHash() {
 }
 
 export default function App() {
+  if (MAINTENANCE) return <Maintenance />
   return (
     <>
       <a href="#main" className="sr-only z-[60] rounded bg-accent px-3 py-2 text-[#04101c] focus:not-sr-only focus:fixed focus:left-3 focus:top-3">Skip to content</a>

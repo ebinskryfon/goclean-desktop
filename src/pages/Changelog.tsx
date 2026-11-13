@@ -11,7 +11,7 @@ const releases: Release[] = [
   {
     version: 'v1.2.0',
     date: '2026-11-04',
-    summary: 'Generated projects now ship with a Dockerfile, and goclean gains install scripts.',
+    summary: 'Generated projects now ship with a Dockerfile, and gostrata gains install scripts.',
     changes: [
       { type: 'feat', text: 'New projects include a Dockerfile and .dockerignore.' },
       { type: 'feat', text: 'Install scripts for Linux/macOS (install.sh) and Windows (install.ps1).' },
@@ -50,10 +50,10 @@ export default function Changelog() {
     <main className="mx-auto max-w-4xl px-5 pb-24 pt-20">
       <Reveal>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Changelog</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-fg sm:text-5xl">What's new in goclean.</h1>
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-fg sm:text-5xl">What's new in gostrata.</h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
           Every release, newest first. Full notes live on{' '}
-          <a href={`${REPO}/releases`} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline">GitHub Releases</a>.
+          <a href={REPO} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline">GitHub Releases</a>.
         </p>
       </Reveal>
 
@@ -65,7 +65,7 @@ export default function Changelog() {
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                 <h2 id={r.version} className="font-mono text-xl font-semibold text-fg">{r.version}</h2>
                 <time dateTime={r.date} className="text-sm text-muted">{r.date}</time>
-                <a href={`${REPO}/releases/tag/${r.version}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-muted transition hover:text-fg">
+                <a href={REPO} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-muted transition hover:text-fg">
                   Release notes <ExternalLink size={12} aria-hidden="true" />
                 </a>
               </div>

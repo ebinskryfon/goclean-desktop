@@ -5,9 +5,9 @@ import { Reveal } from '../../components/Reveal'
 import { INSTALL_CMD } from '../../lib/site'
 
 const cmds = [
-  { name: 'Install', syntax: 'go install github.com/ebinskryfon/goclean@latest', desc: 'Installs the goclean binary into your GOBIN directory.', example: INSTALL_CMD },
-  { name: 'goclean new', syntax: 'goclean new <project-name>', desc: 'Creates a new Go backend project with the Clean Architecture layout.', example: 'goclean new my-project' },
-  { name: 'goclean make:module', syntax: 'goclean make:module <Name> [field:type ...]', desc: 'Generates an entity, DTOs, repository, usecase, handler, migration and route registration for a module.', example: 'goclean make:module Product name:string price:float stock:int' },
+  { name: 'Install', syntax: 'go install github.com/skryfon/gostrata@latest', desc: 'Installs the gostrata binary into your GOBIN directory.', example: INSTALL_CMD },
+  { name: 'gostrata new', syntax: 'gostrata new <project-name>', desc: 'Creates a new Go backend project with the Clean Architecture layout.', example: 'gostrata new my-project' },
+  { name: 'gostrata make:module', syntax: 'gostrata make:module <Name> [field:type ...]', desc: 'Generates an entity, DTOs, repository, usecase, handler, migration and route registration for a module.', example: 'gostrata make:module Product name:string price:float stock:int' },
 ]
 
 export function Commands() {

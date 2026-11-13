@@ -9,7 +9,7 @@ const root = resolve(import.meta.dirname, '..')
 const dist = join(root, 'dist')
 const serverDir = join(root, 'dist-server')
 
-const { render, routes } = await import(pathToFileURL(join(serverDir, 'entry-server.js')).href)
+const { render, routes, MAINTENANCE } = await import(pathToFileURL(join(serverDir, 'entry-server.js')).href)
 const template = await readFile(join(dist, 'index.html'), 'utf8')
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
@@ -42,7 +42,7 @@ function build({ url, title, description, canonical, robots }) {
 
 for (const r of routes) {
   const canonical = `${SITE}${r.path === '/' ? '/' : r.path + '/'}`
-  const html = build({ url: r.path, title: r.title, description: r.description, canonical })
+  const html = build({ url: r.path, title: r.title, description: r.description, canonical, robots: MAINTENANCE ? 'noindex, nofollow' : undefined })
   const file = r.path === '/' ? join(dist, 'index.html') : join(dist, r.path, 'index.html')
   await mkdir(dirname(file), { recursive: true })
   await writeFile(file, html)
@@ -52,7 +52,7 @@ for (const r of routes) {
 // 404 fallback for hosts that serve /404.html (GitHub Pages, Cloudflare Pages).
 const notFound = build({
   url: '/__not-found',
-  title: 'Page not found — goclean',
+  title: 'Page not found — gostrata',
   description: DEFAULT_404_DESC(),
   robots: 'noindex, follow',
 })

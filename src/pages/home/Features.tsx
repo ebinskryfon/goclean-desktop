@@ -13,12 +13,12 @@ const features: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: Power, title: 'Graceful shutdown', body: 'A production-friendly server lifecycle that drains requests before exit.' },
   { icon: Container, title: 'Docker Compose', body: 'A Dockerfile for the API and a ready-to-run Compose file for your PostgreSQL or MySQL database.' },
   { icon: RefreshCw, title: 'Hot reload', body: 'Air integration so changes rebuild and restart the server automatically.' },
-  { icon: Eye, title: 'Dry run', body: 'Preview every file goclean would create before anything touches your disk.' },
+  { icon: Eye, title: 'Dry run', body: 'Preview every file gostrata would create before anything touches your disk.' },
 ]
 
 export function Features() {
   return (
-    <Section id="features" eyebrow="Features" title="Everything a backend needs, decided once." intro="goclean makes the structural decisions for you, so the first commit is already the shape of a maintainable service.">
+    <Section id="features" eyebrow="Features" title="Everything a backend needs, decided once." intro="gostrata makes the structural decisions for you, so the first commit is already the shape of a maintainable service.">
       <ul className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f, i) => (
           <li key={f.title} className="border-b border-r border-line">

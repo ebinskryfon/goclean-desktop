@@ -6,9 +6,9 @@ import { Reveal } from '../../components/Reveal'
 import { INSTALL_CMD } from '../../lib/site'
 
 const steps = [
-  { n: '01', title: 'Install goclean', code: INSTALL_CMD },
-  { n: '02', title: 'Create a new Go project', code: 'goclean new my-saas\ncd my-saas' },
-  { n: '03', title: 'Generate modules and build', code: 'goclean make:module Product name:string price:float stock:int' },
+  { n: '01', title: 'Install gostrata', code: INSTALL_CMD },
+  { n: '02', title: 'Create a new Go project', code: 'gostrata new my-saas\ncd my-saas' },
+  { n: '03', title: 'Generate modules and build', code: 'gostrata make:module Product name:string price:float stock:int' },
 ]
 
 const layers = [

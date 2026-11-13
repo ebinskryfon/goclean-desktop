@@ -20,7 +20,7 @@ function bashLine(line: string): ReactNode[] {
     const field = FIELD_TYPES.exec(p)
     if (/^(["']).*\1$/.test(p)) cls = 'tok-string'
     else if (p.startsWith('-')) cls = 'tok-flag'
-    else if (idx === 0) cls = p === 'goclean' ? 'tok-brand' : 'tok-cmd'
+    else if (idx === 0) cls = p === 'gostrata' ? 'tok-brand' : 'tok-cmd'
     else if (field) {
       out.push(s('tok-cmd', field[1], `${i}a`), ':', s('tok-type', field[2], `${i}b`))
       idx++

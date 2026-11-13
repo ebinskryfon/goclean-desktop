@@ -3,6 +3,7 @@ import { StaticRouter } from 'react-router-dom'
 import App from './App'
 
 export { routes } from './lib/routes'
+export { MAINTENANCE } from './lib/site'
 
 export function render(url: string) {
   return renderToString(
